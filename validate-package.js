@@ -1,14 +1,15 @@
 const packageJson = require('./package.json');
 const fs = require("fs");
 
-let failed = 0;
+let fail = 0;
 for(const key of ['types', 'main', 'module'])
 {
 	const path = packageJson[key];
-	if(!fs.existsSync(path))
-	{
-		console.log('"types": "' + path + '" not found.');
-		failed = 1;
-	}
+	if(!path)
+		console.error('Required value "' + key + '" not found.');
+	else if(!fs.existsSync(path))
+		console.error('File "' + key + '": "' + path + '" not found.');
+	else continue;
+	fail = 1;
 }
-process.exit(failed);
+process.exit(fail);
