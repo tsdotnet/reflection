@@ -1,0 +1,48 @@
+{
+  "name": "@tsdotnet/reflection",
+  "version": "1.0.0",
+  "description": "",
+  "author": "electricessence",
+  "license": "MIT",
+  "types": "dist/TypeValidator.d.ts",
+  "main": "dist/TypeValidator.js",
+  "module": "dist-esm/TypeValidator.js",
+  "keywords": [],
+  "scripts": {
+    "clean": "rimraf dist/* && rimraf dist-esm/*",
+    "build": "npm prune && npm install && npm run clean && copyfiles -u 1 src/**/*.d.ts dist && tsc && tsc -p tsconfig.esm.json",
+    "bump": "npm run precommit && npm version patch",
+    "lint": "eslint src/**/*.ts",
+    "precommit": "npm run lint && npm run test && npm run build && node validate-package.js",
+    "prepublishOnly": "npm run build && node validate-package.js && npm run test",
+    "preversion": "npm run lint",
+    "postversion": "git push && git push --tags",
+    "test": "ts-node -P ./tsconfig.json ./node_modules/jasmine/bin/jasmine --config=spec/jasmine.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsdotnet/reflection.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tsdotnet/reflection/issues"
+  },
+  "homepage": "https://github.com/tsdotnet/reflection#readme",
+  "devDependencies": {
+    "@types/jasmine": "^3.5.10",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "copyfiles": "^2.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-typescript": "^3.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "jasmine": "^3.5.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@tsdotnet/compare": "^1.0.3"
+  }
+}
