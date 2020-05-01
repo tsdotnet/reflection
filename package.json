@@ -43,6 +43,6 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@tsdotnet/compare": "^1.0.3"
+    "@tsdotnet/compare": "^1.0.6"
   }
 }
