@@ -21,19 +21,19 @@ A set of classes and utilities for JavaScript type inspection and validation.
 ```typescript
 interface MyType
 {
-	a: object;
-	b: string;
-	c: number;
-	d: boolean;
-	e: {
-		f: string;
-		g: boolean;
-		h: [
-			number,
-			boolean,
-			string
-		];
-	};
+    a: object;
+    b: string;
+    c: number;
+    d: boolean;
+    e: {
+        f: string;
+        g: boolean;
+        h: [
+            number,
+            boolean,
+            string
+        ];
+    };
 }
 ```
 
@@ -44,19 +44,19 @@ The following can be done with pure JavaScript and still work.
 ```typescript
 const myTypeValidator = new TypeValidator<MyType>(
 {
-	a: Object,
-	b: String,
-	c: Number,
-	d: Boolean,
-	e: {
-		f: String,
-		g: Boolean,
-		h: [
-			Number,
-			Boolean,
-			String
-		]
-	}
+    a: Object,
+    b: String,
+    c: Number,
+    d: Boolean,
+    e: {
+        f: String,
+        g: Boolean,
+        h: [
+            Number,
+            Boolean,
+            String
+        ]
+    }
 });
 ```
 
@@ -64,27 +64,27 @@ const myTypeValidator = new TypeValidator<MyType>(
 
 ```typescript
 const myItem = {
-	a: {},
-	b: 'hello',
-	c: 1,
-	d: true,
-	e: {
-		f: 'whatever',
-		g: false,
-		h: [
-			0,
-			true,
-			'2'
-		]
-	},
-	i: 'noise'
+    a: {},
+    b: 'hello',
+    c: 1,
+    d: true,
+    e: {
+        f: 'whatever',
+        g: false,
+        h: [
+            0,
+            true,
+            '2'
+        ]
+    },
+    i: 'noise'
 };
 
 // no compile-time type errors!
 if (MyTypeValidator.isSubsetOf(myItem)) {
-	console.log(myItem.e.h.length); // 3
-	console.log(myItem.b); // "hello"
+    console.log(myItem.e.h.length); // 3
+    console.log(myItem.b); // "hello"
 } else {
-	throw new TypeError('Invalid type!');
+    throw new TypeError('Invalid type!');
 }
 ```
