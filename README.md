@@ -83,8 +83,8 @@ const myItem = {
 // no compile-time type errors!
 if (MyTypeValidator.isSubsetOf(myItem)) {
 	console.log(myItem.e.h.length); // 3
-    console.log(myItem.b); // "hello"
+	console.log(myItem.b); // "hello"
 } else {
-    throw new TypeError('Invalid type!');
+	throw new TypeError('Invalid type!');
 }
 ```
