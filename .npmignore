@@ -1,8 +1,10 @@
 node_modules
-.idea
-.vs
+.*
 bin
 obj
 *.user
+/spec
 /src
-validate-package.js
+/docs
+typedoc.json
+tsconfig.*
