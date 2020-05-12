@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const TypeInfo_1 = tslib_1.__importStar(require("./TypeInfo"));
 exports.typeInfo = TypeInfo_1.default;
-const compare_1 = require("@tsdotnet/compare");
+const areEqual_1 = tslib_1.__importDefault(require("@tsdotnet/compare/dist/areEqual"));
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /**
  * A descriptor is simply a JSON tree that either has an actual value or a type that identifies what the expect type should be at that leaf in the tree.
@@ -44,7 +44,7 @@ class TypeInfoHelper extends TypeInfo_1.TypeInfo {
             case Boolean:
                 return this.isBoolean;
         }
-        if (this.type !== typeof descriptor || (this.isPrimitive && !compare_1.areEqual(value, descriptor)))
+        if (this.type !== typeof descriptor || (this.isPrimitive && !areEqual_1.default(value, descriptor)))
             return false;
         // Check array contents and confirm intersections.
         if (this.isArrayLike && descriptor instanceof Array) {
@@ -97,7 +97,7 @@ class TypeValidator {
 }
 exports.default = TypeValidator;
 function areInvalid(v, d) {
-    if (!compare_1.areEqual(v, d)) {
+    if (!areEqual_1.default(v, d)) {
         const memberType = new TypeInfoHelper(v);
         if (!memberType.contains(d))
             return true;

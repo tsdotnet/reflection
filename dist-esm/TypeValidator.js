@@ -3,7 +3,7 @@
  * Licensing: MIT
  */
 import typeInfo, { TypeInfo } from './TypeInfo';
-import { areEqual } from '@tsdotnet/compare';
+import areEqual from '@tsdotnet/compare/dist/areEqual';
 export { typeInfo };
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /**

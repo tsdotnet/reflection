@@ -4,7 +4,7 @@
  */
 
 import typeInfo, {TypeInfo} from './TypeInfo';
-import {areEqual} from '@tsdotnet/compare';
+import areEqual from '@tsdotnet/compare/dist/areEqual';
 
 export {typeInfo};
 
