@@ -4,6 +4,7 @@
  * Licensing: MIT
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.TypeInfoHelper = exports.typeInfo = void 0;
 const tslib_1 = require("tslib");
 const TypeInfo_1 = tslib_1.__importStar(require("./TypeInfo"));
 exports.typeInfo = TypeInfo_1.default;
