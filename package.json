@@ -54,7 +54,7 @@
     "typescript": "^3.9.2"
   },
   "dependencies": {
-    "@tsdotnet/compare": "^1.3.4",
+    "@tsdotnet/compare": "^1.3.5",
     "tslib": "^2.0.0"
   }
 }
