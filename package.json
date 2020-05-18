@@ -38,8 +38,8 @@
   "homepage": "https://github.com/tsdotnet/reflection#readme",
   "devDependencies": {
     "@types/jasmine": "^3.5.10",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "copyfiles": "^2.2.0",
     "eslint": "^7.0.0",
     "eslint-config-typescript": "^3.0.0",
@@ -50,7 +50,7 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "ts-node": "^8.10.1",
-    "typedoc": "^0.17.6",
+    "typedoc": "^0.17.7",
     "typescript": "^3.9.2"
   },
   "dependencies": {
