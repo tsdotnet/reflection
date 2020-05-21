@@ -1,9 +1,9 @@
 ﻿/*!
  * @author electricessence / https://github.com/electricessence/
- * Licensing: MIT
+ * @license MIT
  */
 
-import type from '@tsdotnet/compare/dist/type';
+import type from '@tsdotnet/type';
 
 // Only used for primitives.
 const typeInfoRegistry: { [key: string]: TypeInfo } = {};

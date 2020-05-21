@@ -2,7 +2,7 @@
  * @author electricessence / https://github.com/electricessence/
  * Licensing: MIT
  */
-import type from '@tsdotnet/compare/dist/type';
+import type from '@tsdotnet/type';
 // Only used for primitives.
 const typeInfoRegistry = {};
 const VOID0 = void 0;
