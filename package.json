@@ -59,7 +59,7 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
-    "@tsdotnet/compare": "^1.3.12",
+    "@tsdotnet/compare": "^1.3.13",
     "@tsdotnet/type": "^1.0.8",
     "tslib": "^2.0.0"
   }
