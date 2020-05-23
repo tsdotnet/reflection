@@ -9,7 +9,7 @@ import type from '@tsdotnet/type';
 const typeInfoRegistry: { [key: string]: TypeInfo } = {};
 const VOID0 = void 0;
 
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/ban-types */
 
 /**
  * Exposes easy access to type information including inquiring about members.
@@ -91,7 +91,7 @@ export class TypeInfo
 	 * @param target
 	 * @returns {TypeInfo}
 	 */
-	static for (target: any): TypeInfo
+	static for (target: unknown): TypeInfo
 	{
 		return typeInfo(target);
 	}
@@ -141,7 +141,7 @@ export class TypeInfo
  * @param target
  * @returns {TypeInfo}
  */
-export default function typeInfo (target: any): TypeInfo {
+export default function typeInfo (target: unknown): TypeInfo {
 	const t: string = target===null ? 'null' : typeof target;
 	switch(t)
 	{

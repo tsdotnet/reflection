@@ -6,7 +6,7 @@ import type from '@tsdotnet/type';
 // Only used for primitives.
 const typeInfoRegistry = {};
 const VOID0 = void 0;
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/ban-types */
 /**
  * Exposes easy access to type information including inquiring about members.
  */

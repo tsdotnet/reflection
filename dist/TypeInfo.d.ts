@@ -30,7 +30,7 @@ export declare class TypeInfo {
      * @param target
      * @returns {TypeInfo}
      */
-    static for(target: any): TypeInfo;
+    static for(target: unknown): TypeInfo;
     /**
      * Returns a TypeInfo for any member or non-member,
      * where non-members are of type undefined.
@@ -58,4 +58,4 @@ export declare class TypeInfo {
  * @param target
  * @returns {TypeInfo}
  */
-export default function typeInfo(target: any): TypeInfo;
+export default function typeInfo(target: unknown): TypeInfo;

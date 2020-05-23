@@ -27,7 +27,7 @@ export {typeInfo};
 export class TypeInfoHelper
 	extends TypeInfo
 {
-	contains<TDescriptor> (descriptor: any): this is TDescriptor
+	contains<TDescriptor> (descriptor: unknown): this is TDescriptor
 	{
 		const value = this.target;
 
@@ -69,7 +69,7 @@ export class TypeInfoHelper
 		if(this.isObject)
 		{
 			const targetKeys = Object.keys(value);
-			const dKeys = Object.keys(descriptor);
+			const dKeys = Object.keys(descriptor as any);
 
 			// Quick check...
 			if(dKeys.length>targetKeys.length) return false;
@@ -83,7 +83,7 @@ export class TypeInfoHelper
 			// Final pass with recursive...
 			for(const key of dKeys)
 			{
-				if(areInvalid(value[key], descriptor[key])) return false;
+				if(areInvalid(value[key], (descriptor as any)[key])) return false;
 			}
 		}
 
@@ -106,7 +106,7 @@ export default class TypeValidator<T>
 	 * @param o
 	 * @returns {o is T}
 	 */
-	isSubsetOf (o: any): o is T
+	isSubsetOf (o: unknown): o is T
 	{
 		return new TypeInfoHelper(o).contains(this._typeDescriptor);
 	}

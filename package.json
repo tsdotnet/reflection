@@ -17,15 +17,15 @@
   "scripts": {
     "build:dist": "rimraf dist/* && copyfiles -u 1 src/**/*.d.ts dist && tsc",
     "build:dist-esm": "rimraf dist-esm/* && tsc -p tsconfig.esm.json",
-    "build": "npm i && run-p build:*",
+    "build": "pnpm i && run-p build:*",
     "bump": "npm run precommit && npm version patch",
-    "docs": "rimraf docs/* && rimraf docs/.nojekyll && typedoc --options typedoc.json --readme none && node ./.build/create-nojekyll.js",
+    "docs": "rimraf docs/* && rimraf docs/.nojekyll && typedoc --options typedoc.json --readme none",
     "lint": "eslint src/**/*.ts",
-    "precommit": "npm i && run-p lint test && run-p build:* && npm run validate",
+    "precommit": "pnpm i && run-p lint test && run-p build:* && npm run validate",
     "prepublishOnly": "npm run build && run-p validate test",
     "preversion": "run-p lint test",
     "postversion": "git push && git push --tags && npm run docs && git commit -m \"Updated docs.\" docs && git push",
-    "test": "ts-node -P ./tsconfig.json ./node_modules/jasmine/bin/jasmine --config=spec/jasmine.json",
+    "test": "mocha -r ts-node/register tests/**/*.ts",
     "validate": "node ./.build/validate-package.js"
   },
   "repository": {
@@ -37,25 +37,30 @@
   },
   "homepage": "https://github.com/tsdotnet/reflection#readme",
   "devDependencies": {
-    "@types/jasmine": "^3.5.10",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
-    "@typescript-eslint/parser": "^2.34.0",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/parser": "^3.0.0",
+    "chai": "^4.2.0",
     "copyfiles": "^2.2.0",
-    "eslint": "^7.0.0",
+    "eslint": "^7.1.0",
     "eslint-config-typescript": "^3.0.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "jasmine": "^3.5.0",
+    "mocha": "^7.1.2",
     "npm-run-all": "^4.1.5",
+    "nyc": "^15.0.1",
     "rimraf": "^3.0.2",
     "ts-node": "^8.10.1",
     "typedoc": "^0.17.7",
+    "typedoc-plugin-external-module-name": "^3.1.0",
+    "typedoc-plugin-nojekyll": "^1.0.1",
     "typescript": "^3.9.3"
   },
   "dependencies": {
     "@tsdotnet/compare": "^1.3.12",
-    "@tsdotnet/type": "^1.0.7",
+    "@tsdotnet/type": "^1.0.8",
     "tslib": "^2.0.0"
   }
 }

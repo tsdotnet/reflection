@@ -19,7 +19,7 @@ export { typeInfo };
  * }
  */
 export declare class TypeInfoHelper extends TypeInfo {
-    contains<TDescriptor>(descriptor: any): this is TDescriptor;
+    contains<TDescriptor>(descriptor: unknown): this is TDescriptor;
 }
 /**
  * A class for validating if an object matches the type profile of a descriptor.
@@ -32,5 +32,5 @@ export default class TypeValidator<T> {
      * @param o
      * @returns {o is T}
      */
-    isSubsetOf(o: any): o is T;
+    isSubsetOf(o: unknown): o is T;
 }
