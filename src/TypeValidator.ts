@@ -8,8 +8,6 @@ import areEqual from '@tsdotnet/compare/dist/areEqual';
 
 export {typeInfo};
 
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
 /**
  * A descriptor is simply a JSON tree that either has an actual value or a type that identifies what the expect type should be at that leaf in the tree.
  *

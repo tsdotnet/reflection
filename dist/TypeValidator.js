@@ -9,7 +9,6 @@ const tslib_1 = require("tslib");
 const TypeInfo_1 = tslib_1.__importStar(require("./TypeInfo"));
 exports.typeInfo = TypeInfo_1.default;
 const areEqual_1 = tslib_1.__importDefault(require("@tsdotnet/compare/dist/areEqual"));
-/* eslint-disable @typescript-eslint/no-use-before-define */
 /**
  * A descriptor is simply a JSON tree that either has an actual value or a type that identifies what the expect type should be at that leaf in the tree.
  *
