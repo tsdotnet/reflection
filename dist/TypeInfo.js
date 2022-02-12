@@ -6,7 +6,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeInfo = void 0;
 const tslib_1 = require("tslib");
-const type_1 = tslib_1.__importDefault(require("@tsdotnet/type"));
+const type_1 = (0, tslib_1.__importDefault)(require("@tsdotnet/type"));
 // Only used for primitives.
 const typeInfoRegistry = {};
 const VOID0 = void 0;
