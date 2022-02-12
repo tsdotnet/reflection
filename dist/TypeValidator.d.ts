@@ -3,7 +3,7 @@
  * @license MIT
  */
 import typeInfo, { TypeInfo } from './TypeInfo';
-export { typeInfo };
+export { typeInfo, TypeInfo };
 /**
  * A descriptor is simply a JSON tree that either has an actual value or a type that identifies what the expect type should be at that leaf in the tree.
  *
