@@ -6,7 +6,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeInfo = void 0;
 const tslib_1 = require("tslib");
-const type_1 = (0, tslib_1.__importDefault)(require("@tsdotnet/type"));
+const type_1 = tslib_1.__importDefault(require("@tsdotnet/type"));
 // Only used for primitives.
 const typeInfoRegistry = {};
 const VOID0 = void 0;
@@ -34,25 +34,25 @@ class TypeInfo {
         this.isPrimitive = false;
         this.isSymbol = false;
         switch ((this.type = typeof target)) {
-            case "boolean" /* Boolean */:
+            case "boolean" /* type.Value.Boolean */:
                 this.isBoolean = true;
                 this.isPrimitive = true;
                 break;
-            case "number" /* Number */:
+            case "number" /* type.Value.Number */:
                 this.isNumber = true;
                 this.isTrueNaN = isNaN(target);
                 this.isFinite = isFinite(target);
                 this.isValidNumber = !this.isTrueNaN;
                 this.isPrimitive = true;
                 break;
-            case "string" /* String */:
+            case "string" /* type.Value.String */:
                 this.isString = true;
                 this.isPrimitive = true;
                 break;
-            case "symbol" /* Symbol */:
+            case "symbol" /* type.Value.Symbol */:
                 this.isSymbol = true;
                 break;
-            case "object" /* Object */:
+            case "object" /* type.Value.Object */:
                 if (target === null) {
                     this.isNull = true;
                     this.isNullOrUndefined = true;
@@ -64,10 +64,10 @@ class TypeInfo {
                     this.isArrayLike = this.isArray || type_1.default.isArrayLike(target);
                 }
                 break;
-            case "function" /* Function */:
+            case "function" /* type.Value.Function */:
                 this.isFunction = true;
                 break;
-            case "undefined" /* Undefined */:
+            case "undefined" /* type.Value.Undefined */:
                 this.isUndefined = true;
                 this.isNullOrUndefined = true;
                 this.isPrimitive = true;
@@ -131,8 +131,8 @@ exports.TypeInfo = TypeInfo;
 function typeInfo(target) {
     const t = target === null ? 'null' : typeof target;
     switch (t) {
-        case "object" /* Object */:
-        case "function" /* Function */:
+        case "object" /* type.Value.Object */:
+        case "function" /* type.Value.Function */:
             return new TypeInfo(target);
     }
     let info = typeInfoRegistry[t];
