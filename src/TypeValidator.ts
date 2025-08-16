@@ -4,7 +4,7 @@
  */
 
 import typeInfo, {TypeInfo} from './TypeInfo';
-import areEqual from '@tsdotnet/compare/dist/areEqual';
+import {areEqual} from '@tsdotnet/compare';
 
 export {typeInfo, TypeInfo};
 
@@ -67,7 +67,7 @@ export class TypeInfoHelper
 		if(this.isObject)
 		{
 			const targetKeys = Object.keys(value);
-			const dKeys = Object.keys(descriptor as any);
+			const dKeys = Object.keys(descriptor as object);
 
 			// Quick check...
 			if(dKeys.length>targetKeys.length) return false;

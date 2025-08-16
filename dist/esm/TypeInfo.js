@@ -1,58 +1,55 @@
-"use strict";
 /*!
  * @author electricessence / https://github.com/electricessence/
  * @license MIT
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TypeInfo = void 0;
-const tslib_1 = require("tslib");
-const type_1 = tslib_1.__importDefault(require("@tsdotnet/type"));
+import type from '@tsdotnet/type';
 // Only used for primitives.
 const typeInfoRegistry = {};
 const VOID0 = void 0;
-/* eslint-disable @typescript-eslint/ban-types */
 /**
  * Exposes easy access to type information including inquiring about members.
  */
-class TypeInfo {
+export class TypeInfo {
+    target;
+    type;
+    isBoolean = false;
+    isNumber = false;
+    isFinite = false;
+    isValidNumber = false;
+    isString = false;
+    isTrueNaN = false;
+    isObject = false;
+    isArray = false;
+    isArrayLike = false;
+    isFunction = false;
+    isUndefined = false;
+    isNull = false;
+    isNullOrUndefined = false;
+    isPrimitive = false;
+    isSymbol = false;
     // noinspection DuplicatedCode
     constructor(target) {
         this.target = target;
-        this.isBoolean = false;
-        this.isNumber = false;
-        this.isFinite = false;
-        this.isValidNumber = false;
-        this.isString = false;
-        this.isTrueNaN = false;
-        this.isObject = false;
-        this.isArray = false;
-        this.isArrayLike = false;
-        this.isFunction = false;
-        this.isUndefined = false;
-        this.isNull = false;
-        this.isNullOrUndefined = false;
-        this.isPrimitive = false;
-        this.isSymbol = false;
         switch ((this.type = typeof target)) {
-            case "boolean" /* type.Value.Boolean */:
+            case 'boolean':
                 this.isBoolean = true;
                 this.isPrimitive = true;
                 break;
-            case "number" /* type.Value.Number */:
+            case 'number':
                 this.isNumber = true;
                 this.isTrueNaN = isNaN(target);
                 this.isFinite = isFinite(target);
                 this.isValidNumber = !this.isTrueNaN;
                 this.isPrimitive = true;
                 break;
-            case "string" /* type.Value.String */:
+            case 'string':
                 this.isString = true;
                 this.isPrimitive = true;
                 break;
-            case "symbol" /* type.Value.Symbol */:
+            case 'symbol':
                 this.isSymbol = true;
                 break;
-            case "object" /* type.Value.Object */:
+            case 'object':
                 if (target === null) {
                     this.isNull = true;
                     this.isNullOrUndefined = true;
@@ -61,13 +58,13 @@ class TypeInfo {
                 else {
                     this.isObject = true;
                     this.isArray = target instanceof Array;
-                    this.isArrayLike = this.isArray || type_1.default.isArrayLike(target);
+                    this.isArrayLike = this.isArray || type.isArrayLike(target);
                 }
                 break;
-            case "function" /* type.Value.Function */:
+            case 'function':
                 this.isFunction = true;
                 break;
-            case "undefined" /* type.Value.Undefined */:
+            case 'undefined':
                 this.isUndefined = true;
                 this.isNullOrUndefined = true;
                 this.isPrimitive = true;
@@ -121,18 +118,17 @@ class TypeInfo {
         return t instanceof type ? t : null;
     }
 }
-exports.TypeInfo = TypeInfo;
 /**
  * Returns a TypeInfo for any target object.
  * If the target object is of a primitive type, it returns the TypeInfo instance assigned to that type.
  * @param target
  * @returns {TypeInfo}
  */
-function typeInfo(target) {
+export default function typeInfo(target) {
     const t = target === null ? 'null' : typeof target;
     switch (t) {
-        case "object" /* type.Value.Object */:
-        case "function" /* type.Value.Function */:
+        case 'object':
+        case 'function':
             return new TypeInfo(target);
     }
     let info = typeInfoRegistry[t];
@@ -140,5 +136,4 @@ function typeInfo(target) {
         typeInfoRegistry[t] = info = new TypeInfo(target);
     return info;
 }
-exports.default = typeInfo;
 //# sourceMappingURL=TypeInfo.js.map

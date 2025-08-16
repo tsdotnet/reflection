@@ -1,10 +1,15 @@
+"use strict";
 /*!
  * @author electricessence / https://github.com/electricessence/
  * @license MIT
  */
-import typeInfo, { TypeInfo } from './TypeInfo';
-import areEqual from '@tsdotnet/compare/dist/areEqual';
-export { typeInfo, TypeInfo };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TypeInfoHelper = exports.TypeInfo = exports.typeInfo = void 0;
+const tslib_1 = require("tslib");
+const TypeInfo_1 = tslib_1.__importStar(require("./TypeInfo"));
+exports.typeInfo = TypeInfo_1.default;
+Object.defineProperty(exports, "TypeInfo", { enumerable: true, get: function () { return TypeInfo_1.TypeInfo; } });
+const compare_1 = require("@tsdotnet/compare");
 /**
  * A descriptor is simply a JSON tree that either has an actual value or a type that identifies what the expect type should be at that leaf in the tree.
  *
@@ -19,7 +24,7 @@ export { typeInfo, TypeInfo };
  *      g : "literal"
  * }
  */
-export class TypeInfoHelper extends TypeInfo {
+class TypeInfoHelper extends TypeInfo_1.TypeInfo {
     contains(descriptor) {
         const value = this.target;
         // works with literals and values.
@@ -40,7 +45,7 @@ export class TypeInfoHelper extends TypeInfo {
             case Boolean:
                 return this.isBoolean;
         }
-        if (this.type !== typeof descriptor || (this.isPrimitive && !areEqual(value, descriptor)))
+        if (this.type !== typeof descriptor || (this.isPrimitive && !(0, compare_1.areEqual)(value, descriptor)))
             return false;
         // Check array contents and confirm intersections.
         if (this.isArrayLike && descriptor instanceof Array) {
@@ -73,10 +78,11 @@ export class TypeInfoHelper extends TypeInfo {
         return true;
     }
 }
+exports.TypeInfoHelper = TypeInfoHelper;
 /**
  * A class for validating if an object matches the type profile of a descriptor.
  */
-export default class TypeValidator {
+class TypeValidator {
     constructor(_typeDescriptor) {
         this._typeDescriptor = _typeDescriptor;
         Object.freeze(this);
@@ -90,8 +96,9 @@ export default class TypeValidator {
         return new TypeInfoHelper(o).contains(this._typeDescriptor);
     }
 }
+exports.default = TypeValidator;
 function areInvalid(v, d) {
-    if (!areEqual(v, d)) {
+    if (!(0, compare_1.areEqual)(v, d)) {
         const memberType = new TypeInfoHelper(v);
         if (!memberType.contains(d))
             return true;

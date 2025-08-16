@@ -9,8 +9,6 @@ import type from '@tsdotnet/type';
 const typeInfoRegistry: { [key: string]: TypeInfo } = {};
 const VOID0 = void 0;
 
-/* eslint-disable @typescript-eslint/ban-types */
-
 /**
  * Exposes easy access to type information including inquiring about members.
  */
@@ -34,29 +32,30 @@ export class TypeInfo
 	readonly isSymbol: boolean = false;
 
 	// noinspection DuplicatedCode
+	 
 	constructor (protected readonly target: any)
 	{
 		switch((this.type = typeof target))
 		{
-			case type.Value.Boolean:
+			case 'boolean':
 				this.isBoolean = true;
 				this.isPrimitive = true;
 				break;
-			case type.Value.Number:
+			case 'number':
 				this.isNumber = true;
 				this.isTrueNaN = isNaN(target);
 				this.isFinite = isFinite(target);
 				this.isValidNumber = !this.isTrueNaN;
 				this.isPrimitive = true;
 				break;
-			case type.Value.String:
+			case 'string':
 				this.isString = true;
 				this.isPrimitive = true;
 				break;
-			case type.Value.Symbol:
+			case 'symbol':
 				this.isSymbol = true;
 				break;
-			case type.Value.Object:
+			case 'object':
 				if(target===null)
 				{
 					this.isNull = true;
@@ -70,10 +69,10 @@ export class TypeInfo
 					this.isArrayLike = this.isArray || type.isArrayLike(target);
 				}
 				break;
-			case type.Value.Function:
+			case 'function':
 				this.isFunction = true;
 				break;
-			case type.Value.Undefined:
+			case 'undefined':
 				this.isUndefined = true;
 				this.isNullOrUndefined = true;
 				this.isPrimitive = true;
@@ -114,6 +113,7 @@ export class TypeInfo
 	 * @param type
 	 * @returns {boolean}
 	 */
+	 
 	is<T extends object> (type: new (...params: any[]) => T): boolean
 	{
 		const t = this.target;
@@ -127,6 +127,7 @@ export class TypeInfo
 	 * @param type
 	 * @returns {T|null}
 	 */
+	 
 	as<T extends object> (type: new (...params: any[]) => T): T | null
 	{
 		const t = this.target;
@@ -145,8 +146,8 @@ export default function typeInfo (target: unknown): TypeInfo {
 	const t: string = target===null ? 'null' : typeof target;
 	switch(t)
 	{
-		case type.Value.Object:
-		case type.Value.Function:
+		case 'object':
+		case 'function':
 			return new TypeInfo(target);
 	}
 	let info = typeInfoRegistry[t];
