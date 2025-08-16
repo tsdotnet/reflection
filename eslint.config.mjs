@@ -1,23 +1,23 @@
-import js from '@eslint/js';
-import tsEslint from 'typescript-eslint';
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
-export default [
-  js.configs.recommended,
-  ...tsEslint.configs.recommended,
-  {
-    ignores: [
-      "dist/",
-      "dist-esm/",
-      "docs/",
-      "tests/",
-      "node_modules/"
-    ]
-  },
-  {
-    files: ["**/*.ts"],
-    rules: {
-      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-      "@typescript-eslint/no-explicit-any": "off"
-    }
-  }
-];
+export default tseslint.config(
+	eslint.configs.recommended,
+	...tseslint.configs.recommended,
+	{
+		rules: {
+			"semi": ["warn", "always"],
+			"indent": ["warn", "tab", { "SwitchCase": 1 }],
+			"@typescript-eslint/no-explicit-any": "off"
+		},
+		files: ['src/**/*.ts'],
+		languageOptions: {
+			ecmaVersion: 2022,
+			sourceType: 'module',
+			globals: {
+				console: 'readonly',
+				process: 'readonly'
+			}
+		}
+	}
+);

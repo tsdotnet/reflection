@@ -86,6 +86,9 @@
       "get-func-name@<2.0.1": ">=2.0.1",
       "@babel/traverse@<7.23.2": ">=7.23.2",
       "braces@<3.0.3": ">=3.0.3"
-    }
+    },
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
