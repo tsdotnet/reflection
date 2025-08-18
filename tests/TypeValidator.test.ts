@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import {expect} from 'chai';
+import { describe, it, expect } from 'vitest';
 import TypeValidator, {TypeInfoHelper} from '../src/TypeValidator';
 
 const example = new TypeInfoHelper({
@@ -31,7 +31,7 @@ describe('.contains(descriptor)', () => {
 				g: Boolean,
 				h: Array
 			}
-		})).to.be.true;
+		})).toBe(true);
 
 		expect(example.contains({
 			a: Object,
@@ -47,7 +47,7 @@ describe('.contains(descriptor)', () => {
 					String
 				]
 			}
-		})).to.be.true;
+		})).toBe(true);
 
 		expect(example.contains({
 			a: Object,
@@ -64,7 +64,7 @@ describe('.contains(descriptor)', () => {
 				]
 			},
 			i: 'noise'
-		})).to.be.true;
+		})).toBe(true);
 
 		expect(example.contains({
 			a: Object,
@@ -78,7 +78,7 @@ describe('.contains(descriptor)', () => {
 					Number
 				]
 			}
-		})).to.be.true;
+		})).toBe(true);
 	});
 
 	it('should detect a negative match', () => {
@@ -96,7 +96,7 @@ describe('.contains(descriptor)', () => {
 					String
 				]
 			}
-		})).to.be.true;
+		})).toBe(true);
 
 		expect(!example.contains({
 			a: Object,
@@ -110,7 +110,7 @@ describe('.contains(descriptor)', () => {
 					String
 				]
 			}
-		})).to.be.true;
+		})).toBe(true);
 
 
 		expect(!example.contains({
@@ -126,7 +126,7 @@ describe('.contains(descriptor)', () => {
 				]
 			},
 			i: 'goo'
-		})).to.be.true;
+		})).toBe(true);
 
 		expect(!example.contains({
 			a: Object,
@@ -141,7 +141,7 @@ describe('.contains(descriptor)', () => {
 				]
 			},
 			i: Boolean
-		})).to.be.true;
+		})).toBe(true);
 	});
 });
 
@@ -205,19 +205,19 @@ describe('Example', () =>
 
 		// no compile-time type errors!
 		const result = myTypeValidator.isSubsetOf(myItem);
-		expect(result).to.be.true;
+		expect(result).toBe(true);
 		if(result)
 		{
 			expect(myItem.e.h.length).equal(3);
 			expect(myItem.b).equal('hello');
 		}
 
-		expect(!myTypeValidator.isSubsetOf(true)).to.be.true;
-		expect(!myTypeValidator.isSubsetOf('no')).to.be.true;
+		expect(!myTypeValidator.isSubsetOf(true)).toBe(true);
+		expect(!myTypeValidator.isSubsetOf('no')).toBe(true);
 		expect(!myTypeValidator.isSubsetOf({
 			a: {},
 			b: 'hello'
-		})).to.be.true;
+		})).toBe(true);
 
 	})
 );
@@ -316,6 +316,6 @@ describe('Complex test', () =>
 				'id': 4490918296,
 				'id_str': '4490918296'
 			}
-		)).to.be.true;
+		)).toBe(true);
 
 	}));

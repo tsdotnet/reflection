@@ -1,31 +1,16 @@
+import { TypeInfo } from './TypeInfo.js';
+export { default as typeInfo } from './TypeInfo.js';
+import { areEqual } from '@tsdotnet/compare';
+
 /*!
  * @author electricessence / https://github.com/electricessence/
  * @license MIT
  */
-import typeInfo, { TypeInfo } from './TypeInfo';
-import { areEqual } from '@tsdotnet/compare';
-export { typeInfo, TypeInfo };
-/**
- * A descriptor is simply a JSON tree that either has an actual value or a type that identifies what the expect type should be at that leaf in the tree.
- *
- * var descriptor = {
- *      a : Object,
- *      b : String,
- *      c : {
- *          d : true ,
- *          e : Array,
- *          f : []
- *      },
- *      g : "literal"
- * }
- */
-export class TypeInfoHelper extends TypeInfo {
+class TypeInfoHelper extends TypeInfo {
     contains(descriptor) {
         const value = this.target;
-        // works with literals and values.
         if (value === descriptor)
             return true;
-        // First check against simple types.
         switch (descriptor) {
             case Function:
                 return this.isFunction;
@@ -42,7 +27,6 @@ export class TypeInfoHelper extends TypeInfo {
         }
         if (this.type !== typeof descriptor || (this.isPrimitive && !areEqual(value, descriptor)))
             return false;
-        // Check array contents and confirm intersections.
         if (this.isArrayLike && descriptor instanceof Array) {
             const vLen = value.length, dLen = descriptor.length;
             if (vLen !== dLen && (isNaN(vLen) || vLen < dLen))
@@ -56,15 +40,12 @@ export class TypeInfoHelper extends TypeInfo {
         if (this.isObject) {
             const targetKeys = Object.keys(value);
             const dKeys = Object.keys(descriptor);
-            // Quick check...
             if (dKeys.length > targetKeys.length)
                 return false;
-            // Quick check #2...
             for (const key of dKeys) {
                 if (targetKeys.indexOf(key) === -1)
                     return false;
             }
-            // Final pass with recursive...
             for (const key of dKeys) {
                 if (areInvalid(value[key], descriptor[key]))
                     return false;
@@ -73,20 +54,12 @@ export class TypeInfoHelper extends TypeInfo {
         return true;
     }
 }
-/**
- * A class for validating if an object matches the type profile of a descriptor.
- */
-export default class TypeValidator {
+class TypeValidator {
     _typeDescriptor;
     constructor(_typeDescriptor) {
         this._typeDescriptor = _typeDescriptor;
         Object.freeze(this);
     }
-    /**
-     * Returns true if the parameter matches the descriptor.
-     * @param o
-     * @returns {o is T}
-     */
     isSubsetOf(o) {
         return new TypeInfoHelper(o).contains(this._typeDescriptor);
     }
@@ -99,4 +72,6 @@ function areInvalid(v, d) {
     }
     return false;
 }
+
+export { TypeInfo, TypeInfoHelper, TypeValidator as default };
 //# sourceMappingURL=TypeValidator.js.map

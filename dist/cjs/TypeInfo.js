@@ -8,14 +8,9 @@ exports.TypeInfo = void 0;
 exports.default = typeInfo;
 const tslib_1 = require("tslib");
 const type_1 = tslib_1.__importDefault(require("@tsdotnet/type"));
-// Only used for primitives.
 const typeInfoRegistry = {};
 const VOID0 = void 0;
-/**
- * Exposes easy access to type information including inquiring about members.
- */
 class TypeInfo {
-    // noinspection DuplicatedCode
     constructor(target) {
         this.target = target;
         this.isBoolean = false;
@@ -77,43 +72,20 @@ class TypeInfo {
         }
         Object.freeze(this);
     }
-    /**
-     * Returns a TypeInfo for any target object.
-     * If the target object is of a primitive type, it returns the TypeInfo instance assigned to that type.
-     * @param target
-     * @returns {TypeInfo}
-     */
     static for(target) {
         return typeInfo(target);
     }
-    /**
-     * Returns a TypeInfo for any member or non-member,
-     * where non-members are of type undefined.
-     * @param name
-     * @returns {TypeInfo}
-     */
     member(name) {
         const t = this.target;
         const m = !this.isPrimitive && t && name in t ? t[name] : VOID0;
         return typeInfo(m);
     }
-    /**
-     * Returns true if the target matches the type (instanceof).
-     * @param type
-     * @returns {boolean}
-     */
     is(type) {
         const t = this.target;
         if (t == null)
             throw '\'type\' is null or undefined';
         return t instanceof type;
     }
-    /**
-     * Returns null if the target does not match the type (instanceof).
-     * Otherwise returns the target as the type.
-     * @param type
-     * @returns {T|null}
-     */
     as(type) {
         const t = this.target;
         if (t == null)
@@ -122,12 +94,6 @@ class TypeInfo {
     }
 }
 exports.TypeInfo = TypeInfo;
-/**
- * Returns a TypeInfo for any target object.
- * If the target object is of a primitive type, it returns the TypeInfo instance assigned to that type.
- * @param target
- * @returns {TypeInfo}
- */
 function typeInfo(target) {
     const t = target === null ? 'null' : typeof target;
     switch (t) {
