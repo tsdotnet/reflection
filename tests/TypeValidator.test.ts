@@ -319,3 +319,42 @@ describe('Complex test', () =>
 		)).toBe(true);
 
 	}));
+
+	describe('direct constructor validation', () => {
+		it('should validate Object constructor directly', () => {
+			// Test the specific case that covers line 39 in TypeValidator.ts
+			const objectValidator = new TypeInfoHelper({});
+			expect(objectValidator.contains(Object)).toBe(true);
+			
+			const nonObjectValidator = new TypeInfoHelper(42);
+			expect(nonObjectValidator.contains(Object)).toBe(false);
+			
+			const nullValidator = new TypeInfoHelper(null);
+			expect(nullValidator.contains(Object)).toBe(false);
+			
+			const arrayValidator = new TypeInfoHelper([]);
+			expect(arrayValidator.contains(Object)).toBe(true); // Arrays are objects in JS
+		});
+
+		it('should validate other constructors directly', () => {
+			const stringValidator = new TypeInfoHelper('test');
+			expect(stringValidator.contains(String)).toBe(true);
+			expect(stringValidator.contains(Object)).toBe(false);
+			
+			const numberValidator = new TypeInfoHelper(123);
+			expect(numberValidator.contains(Number)).toBe(true);
+			expect(numberValidator.contains(Object)).toBe(false);
+			
+			const booleanValidator = new TypeInfoHelper(true);
+			expect(booleanValidator.contains(Boolean)).toBe(true);
+			expect(booleanValidator.contains(Object)).toBe(false);
+			
+			const functionValidator = new TypeInfoHelper(() => {});
+			expect(functionValidator.contains(Function)).toBe(true);
+			expect(functionValidator.contains(Object)).toBe(false);
+			
+			const arrayValidator = new TypeInfoHelper([1, 2, 3]);
+			expect(arrayValidator.contains(Array)).toBe(true);
+			expect(arrayValidator.contains(Object)).toBe(true);
+		});
+	});

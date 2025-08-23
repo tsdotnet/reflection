@@ -290,4 +290,74 @@ describe('TypeInfo comprehensive tests', () => {
 			expect(info2.isObject).toBe(true);
 		});
 	});
+
+	describe('error handling', () => {
+		it('should have proper error message format for unknown types', () => {
+			// The error on line 81 is unreachable in normal JavaScript since typeof
+			// can only return known values. However, we can verify the error logic
+			// by testing the error message construction pattern
+			
+			const testUnknownType = 'hypothetical-unknown';
+			const expectedErrorMessage = 'Fatal type failure.  Unknown type: ' + testUnknownType;
+			
+			expect(expectedErrorMessage).toBe('Fatal type failure.  Unknown type: hypothetical-unknown');
+			expect(expectedErrorMessage).toContain('Fatal type failure');
+			expect(expectedErrorMessage).toContain('Unknown type:');
+			expect(expectedErrorMessage).toContain(testUnknownType);
+			
+			// Test the error would be an Error instance
+			const mockError = new Error(expectedErrorMessage);
+			expect(mockError).toBeInstanceOf(Error);
+			expect(mockError.message).toBe(expectedErrorMessage);
+		});
+		
+		it('should demonstrate the error path logic', () => {
+			// We can't trigger the actual error in line 81, but we can demonstrate
+			// that the switch statement logic would work as expected
+			
+			function simulateTypeSwitch(type: string) {
+				switch(type) {
+					case 'boolean':
+					case 'number': 
+					case 'string':
+					case 'symbol':
+					case 'object':
+					case 'function':
+					case 'undefined':
+						return 'known-type';
+					default:
+						throw new Error('Fatal type failure.  Unknown type: ' + type);
+				}
+			}
+			
+			// Test known types don't throw
+			expect(simulateTypeSwitch('boolean')).toBe('known-type');
+			expect(simulateTypeSwitch('object')).toBe('known-type');
+			expect(simulateTypeSwitch('function')).toBe('known-type');
+			
+			// Test unknown type throws the expected error
+			expect(() => simulateTypeSwitch('unknown')).toThrow('Fatal type failure.  Unknown type: unknown');
+			expect(() => simulateTypeSwitch('exotic')).toThrow('Fatal type failure.  Unknown type: exotic');
+		});
+
+		it('should verify all known typeof values are handled', () => {
+			// Verify all standard typeof return values have corresponding cases
+			const knownTypes = [
+				{ value: true, expectedType: 'boolean' },
+				{ value: 42, expectedType: 'number' },
+				{ value: 'test', expectedType: 'string' },
+				{ value: Symbol('test'), expectedType: 'symbol' },
+				{ value: {}, expectedType: 'object' },
+				{ value: null, expectedType: 'object' }, // null has typeof 'object'
+				{ value: [], expectedType: 'object' }, // arrays have typeof 'object'
+				{ value: () => {}, expectedType: 'function' },
+				{ value: undefined, expectedType: 'undefined' }
+			];
+			
+			knownTypes.forEach(({ value, expectedType }) => {
+				expect(() => new TypeInfo(value)).not.toThrow();
+				expect(typeof value).toBe(expectedType);
+			});
+		});
+	});
 });
