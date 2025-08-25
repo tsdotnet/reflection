@@ -25,8 +25,8 @@ importers:
   .:
     dependencies:
       '@tsdotnet/compare':
-        specifier: ^1.7.3
-        version: 1.7.3
+        specifier: ^1.7.4
+        version: 1.7.4
       '@tsdotnet/type':
         specifier: ^1.2.7
         version: 1.2.7
@@ -516,8 +516,8 @@ packages:
   '@tsdotnet/common-interfaces@1.0.6':
     resolution: {integrity: sha512-JHyYznerNMxZD2jl1aUmrguw3ge0PzqQf6PyYdw9jAoPGuzKRDYX7fX4OK7LDdLBU3yaUdY5WXEqbvX5IgVCJA==}
 
-  '@tsdotnet/compare@1.7.3':
-    resolution: {integrity: sha512-5zJ7XQmEVKCieBKrNGAdxKoePTQTxryogXYjjxuc56tqfw6NCZnVMtRADeJYpnGW+swqQDlkeGlrEDz1rEBN2Q==}
+  '@tsdotnet/compare@1.7.4':
+    resolution: {integrity: sha512-u/rbc3Cw6MS3NxwiZ095OrvDxFQZzUsImMYlyrlVaXAr1HPwl4TleOaCjL+cVYECBEkq1eEwlXuxdZbsbvZRww==}
 
   '@tsdotnet/type@1.2.7':
     resolution: {integrity: sha512-HQNSZRWH0KiVNN6jPoDXrL1a5KxjJ+TtWTB7mgi0212r12zF1O8lngHuvYbeMmTwuZgLmnIGA+qiOFfyDLxXkg==}
@@ -1805,7 +1805,7 @@ snapshots:
 
   '@tsdotnet/common-interfaces@1.0.6': {}
 
-  '@tsdotnet/compare@1.7.3':
+  '@tsdotnet/compare@1.7.4':
     dependencies:
       '@tsdotnet/common-interfaces': 1.0.6
       '@tsdotnet/type': 1.2.7
