@@ -3,7 +3,7 @@
  * @license MIT
  */
 
-import typeInfo, {TypeInfo} from './TypeInfo';
+import typeInfo, {TypeInfo} from './TypeInfo.js';
 import {areEqual} from '@tsdotnet/compare';
 
 export {typeInfo, TypeInfo};

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { describe, it, expect } from 'vitest';
-import TypeValidator, {TypeInfoHelper} from '../src/TypeValidator';
+import TypeValidator, {TypeInfoHelper} from '../src/TypeValidator.js';
 
 const example = new TypeInfoHelper({
 	a: {},

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { TypeInfo } from '../src/TypeValidator';
+import { TypeInfo } from '../src/TypeValidator.js';
 
 describe('TypeInfo comprehensive tests', () => {
 	describe('primitive types', () => {

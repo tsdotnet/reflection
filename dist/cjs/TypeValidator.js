@@ -6,11 +6,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeInfoHelper = exports.TypeInfo = exports.typeInfo = void 0;
 const tslib_1 = require("tslib");
-const TypeInfo_1 = tslib_1.__importStar(require("./TypeInfo"));
-exports.typeInfo = TypeInfo_1.default;
-Object.defineProperty(exports, "TypeInfo", { enumerable: true, get: function () { return TypeInfo_1.TypeInfo; } });
+const TypeInfo_js_1 = tslib_1.__importStar(require("./TypeInfo.js"));
+exports.typeInfo = TypeInfo_js_1.default;
+Object.defineProperty(exports, "TypeInfo", { enumerable: true, get: function () { return TypeInfo_js_1.TypeInfo; } });
 const compare_1 = require("@tsdotnet/compare");
-class TypeInfoHelper extends TypeInfo_1.TypeInfo {
+class TypeInfoHelper extends TypeInfo_js_1.TypeInfo {
     contains(descriptor) {
         const value = this.target;
         if (value === descriptor)

@@ -2,7 +2,7 @@
  * @author electricessence / https://github.com/electricessence/
  * @license MIT
  */
-import typeInfo, { TypeInfo } from './TypeInfo';
+import typeInfo, { TypeInfo } from './TypeInfo.js';
 export { typeInfo, TypeInfo };
 export declare class TypeInfoHelper extends TypeInfo {
     contains<TDescriptor>(descriptor: unknown): this is TDescriptor;
