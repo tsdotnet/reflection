@@ -4,6 +4,10 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.tsdotnet = global.tsdotnet || {}, global.tsdotnet.reflection = global.tsdotnet.reflection || {}), global.tsdotnet.type, global.tsdotnet.compare));
 })(this, (function (exports, type, compare) { 'use strict';
 
+    function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+    var type__default = /*#__PURE__*/_interopDefault(type);
+
     /*!
      * @author electricessence / https://github.com/electricessence/
      * @license MIT
@@ -58,7 +62,7 @@
                     else {
                         this.isObject = true;
                         this.isArray = target instanceof Array;
-                        this.isArrayLike = this.isArray || type.isArrayLike(target);
+                        this.isArrayLike = this.isArray || type__default.default.isArrayLike(target);
                     }
                     break;
                 case 'function':
