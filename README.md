@@ -1,4 +1,4 @@
-![@tsdotnet/reflection: Ask a value what it is. Runtime type checks that narrow.](https://cdn.jsdelivr.net/gh/tsdotnet/reflection@master/assets/banner.svg)
+<a href="https://tsdotnet.github.io/reflection/"><img src="https://cdn.jsdelivr.net/gh/tsdotnet/reflection@master/assets/banner.svg" alt="@tsdotnet/reflection: Ask a value what it is. Runtime type checks that narrow."></a>
 
 [![npm version](https://img.shields.io/npm/v/@tsdotnet/reflection.svg?style=flat-square)](https://www.npmjs.com/package/@tsdotnet/reflection)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/tsdotnet/reflection/blob/master/LICENSE)
