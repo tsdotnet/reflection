@@ -1,93 +1,45 @@
-# ![alt text](https://avatars1.githubusercontent.com/u/64487547?s=30 "tsdotnet") tsdotnet / reflection
+![@tsdotnet/reflection: Ask a value what it is. Runtime type checks that narrow.](https://cdn.jsdelivr.net/gh/tsdotnet/reflection@master/assets/banner.svg)
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/tsdotnet/reflection/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@tsdotnet/reflection.svg?style=flat-square)](https://www.npmjs.com/package/@tsdotnet/reflection)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/tsdotnet/reflection/blob/master/LICENSE)
 
-A set of classes and utilities for JavaScript type inspection and validation.
+Runtime type inspection with `typeInfo`, and `TypeValidator` for checking the shape of unknown values.
+
+## Install
+
+```sh
+npm install @tsdotnet/reflection
+```
+
+## Usage
+
+```ts
+import { typeInfo } from '@tsdotnet/reflection';
+
+typeInfo(42).isValidNumber;      // true
+typeInfo('a').isString;          // true
+typeInfo(null).isNullOrUndefined; // true
+```
+
+`TypeValidator<T>` (the default export) is built from a descriptor object; `isSubsetOf(value)` checks the value has at least those members and narrows it to `T`.
+
+## Use it from
+
+ESM (`import { typeInfo } from '@tsdotnet/reflection';`) or CommonJS (`const { typeInfo } = require('@tsdotnet/reflection');`).
+
+<details><summary>In a browser, without a bundler</summary>
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@tsdotnet/type@1/dist/umd/type.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tsdotnet/compare@1/dist/umd/compare.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tsdotnet/reflection@1/dist/umd/reflection.min.js"></script>
+<script>
+  const { typeInfo } = tsdotnet.reflection;
+</script>
+```
+
+</details>
 
 ## Docs
 
 [tsdotnet.github.io/reflection](https://tsdotnet.github.io/reflection/)
-
-## `TypeValidator<T>`
-
-### Benefits
-
-- Allows for run-time validation and checking of dynamic types as well as integrated **type-guarding**.
-- Super easy to use, basically only requires a copy paste.
-- Works with literals!
-
-### Usage
-
-#### Step 1: Declare the expected type/interface.
-
-```typescript
-interface MyType
-{
-    a: object;
-    b: string;
-    c: number;
-    d: boolean;
-    e: {
-        f: string;
-        g: boolean;
-        h: [
-            number,
-            boolean,
-            string
-        ];
-    };
-}
-```
-
-#### Step 2: Copy the interface as an actual object and `<type>` the validator
-
-The following can be done with pure JavaScript and still work.
-
-```typescript
-const myTypeValidator = new TypeValidator<MyType>(
-{
-    a: Object,
-    b: String,
-    c: Number,
-    d: Boolean,
-    e: {
-        f: String,
-        g: Boolean,
-        h: [
-            Number,
-            Boolean,
-            String
-        ]
-    }
-});
-```
-
-#### Step 3: validate as many times as you want:
-
-```typescript
-const myItem = {
-    a: {},
-    b: 'hello',
-    c: 1,
-    d: true,
-    e: {
-        f: 'whatever',
-        g: false,
-        h: [
-            0,
-            true,
-            '2'
-        ]
-    },
-    i: 'noise'
-};
-
-// no compile-time type errors!
-if (MyTypeValidator.isSubsetOf(myItem)) {
-    console.log(myItem.e.h.length); // 3
-    console.log(myItem.b); // "hello"
-} else {
-    throw new TypeError('Invalid type!');
-}
-```
