@@ -101,9 +101,12 @@ function typeInfo(target) {
         case 'function':
             return new TypeInfo(target);
     }
-    let info = typeInfoRegistry[t];
+    const key = t !== 'number' ? t
+        : isNaN(target) ? 'number:NaN'
+            : isFinite(target) ? 'number' : 'number:infinite';
+    let info = typeInfoRegistry[key];
     if (!info)
-        typeInfoRegistry[t] = info = new TypeInfo(target);
+        typeInfoRegistry[key] = info = new TypeInfo(target);
     return info;
 }
 //# sourceMappingURL=TypeInfo.js.map

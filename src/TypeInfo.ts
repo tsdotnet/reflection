@@ -5,7 +5,7 @@
 
 import type from '@tsdotnet/type';
 
-// Only used for primitives.
+// Only used for primitives: one instance per type, and for numbers one per kind (finite, infinite, NaN).
 const typeInfoRegistry: { [key: string]: TypeInfo } = {};
 const VOID0 = void 0;
 
@@ -150,7 +150,11 @@ export default function typeInfo (target: unknown): TypeInfo {
 		case 'function':
 			return new TypeInfo(target);
 	}
-	let info = typeInfoRegistry[t];
-	if(!info) typeInfoRegistry[t] = info = new TypeInfo(target);
+	// a number's flags depend on its value, so NaN, infinite and finite numbers each get their own shared instance
+	const key = t!=='number' ? t
+		: isNaN(target as number) ? 'number:NaN'
+			: isFinite(target as number) ? 'number' : 'number:infinite';
+	let info = typeInfoRegistry[key];
+	if(!info) typeInfoRegistry[key] = info = new TypeInfo(target);
 	return info;
 }
